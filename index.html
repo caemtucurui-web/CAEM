@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="CAEM — Centro Acadêmico de Engenharia Mecânica da UFPA Tucuruí. Representando os estudantes da FEM CAMTUC desde 2022.">
+<meta name="theme-color" content="#8C2BBE">
+<meta property="og:title" content="CAEM — Centro Acadêmico de Engenharia Mecânica · UFPA Tucuruí">
+<meta property="og:description" content="Representando os estudantes de Engenharia Mecânica da UFPA Tucuruí. Diretoria, eventos, estatuto e mais.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<title>CAEM — Centro Acadêmico de Engenharia Mecânica · UFPA Tucuruí</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════
+   DESIGN SYSTEM — CAEM
+   Purple: #8C2BBE  Dark: #08050D
+   Font: Bebas Neue (headlines) + Montserrat
+════════════════════════════════════════ */
+:root {
+  --purple:  #8C2BBE;
+  --purple2: #4B176E;
+  --purple3: #2A123D;
+  --magenta: #A4165A;
+  --bg:      #08050D;
+  --bg2:     #100817;
+  --bg3:     #16091F;
+  --white:   #F6F4FA;
+  --text:    #D8D7DE;
+  --muted:   #787684;
+  --gold:    #D4A843;
+  --font-h:  'Bebas Neue', sans-serif;
+  --font-b:  'Montserrat', sans-serif;
+  --r:       4px;
+  --max:     1200px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-b);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--purple2); border-radius: 3px; }
+
+.container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+.section    { padding: 96px 0; }
+.section-alt { background: var(--bg2); }
+
+.eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--purple); margin-bottom: 12px;
+}
+.section-title {
+  font-family: var(--font-h); font-size: clamp(38px, 5vw, 58px);
+  color: var(--white); letter-spacing: 0.03em; line-height: 1; margin-bottom: 8px;
+}
+.section-line {
+  width: 56px; height: 3px;
+  background: linear-gradient(90deg, var(--purple), transparent);
+  margin: 12px 0 32px;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-b); font-size: 13px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  padding: 14px 28px; border-radius: var(--r);
+  cursor: pointer; text-decoration: none; border: none; transition: all 0.2s;
+}
+.btn-primary { background: var(--purple); color: var(--white); }
+.btn-primary:hover { background: #A040D0; transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--purple); border: 2px solid var(--purple); }
+.btn-outline:hover { background: var(--purple); color: var(--white); }
+
+/* ── NAVBAR ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(8,5,13,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(75,23,110,0.3); transition: all 0.3s;
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; height: 64px; max-width: var(--max); margin: 0 auto;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.nav-logo img { height: 40px; width: auto; }
+.nav-logo-text {
+  font-family: var(--font-h); font-size: 20px; color: var(--white);
+  letter-spacing: 0.08em; line-height: 1;
+}
+.nav-logo-sub {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted); display: block;
+}
+.nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+.nav-links a {
+  font-size: 12px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.1em; color: #888; text-decoration: none;
+  padding: 6px 12px; border-radius: var(--r); transition: all 0.2s;
+}
+.nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+.nav-cta { background: var(--purple) !important; color: var(--white) !important; padding: 8px 16px !important; }
+.nav-cta:hover { background: #A040D0 !important; }
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-toggle span { display: block; width: 24px; height: 2px; background: var(--white); margin: 5px 0; transition: 0.3s; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; padding-top: 64px;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(75,23,110,0.35) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 30% at 70% 0%,   rgba(164,22,90,0.18)  0%, transparent 60%),
+    var(--bg);
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(216,215,222,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(216,215,222,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black, transparent);
+  pointer-events: none;
+}
+.hero-inner { text-align: center; position: relative; z-index: 1; padding: 40px 24px; }
+.hero-logo {
+  width: 200px; height: 200px; margin: 0 auto 32px;
+  display: block;
+  filter: drop-shadow(0 0 60px rgba(140,43,190,0.5));
+}
+.hero-sup {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--purple); margin-bottom: 16px; display: block;
+}
+.hero-title {
+  font-family: var(--font-h);
+  font-size: clamp(52px, 9vw, 110px);
+  color: var(--white); letter-spacing: 0.03em; line-height: 0.95;
+  margin-bottom: 20px;
+}
+.hero-title span { color: var(--purple); }
+.hero-subtitle {
+  font-size: clamp(13px, 2vw, 16px); color: var(--muted);
+  font-weight: 500; letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 40px;
+}
+.hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px; }
+.hero-institucional {
+  display: flex; align-items: center; justify-content: center;
+  gap: 20px; flex-wrap: wrap;
+}
+.hero-inst-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 20px; border-radius: 100px;
+  border: 1px solid rgba(140,43,190,0.2);
+  background: rgba(140,43,190,0.06);
+}
+.hero-inst-item img { height: 28px; width: auto; filter: brightness(0) invert(1); opacity: 0.6; }
+.hero-inst-item span {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+/* ── SOBRE ── */
+.sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.sobre-text p { font-size: 15px; color: #9090A8; line-height: 1.85; margin-bottom: 16px; }
+.sobre-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.stat-card {
+  background: var(--bg3); border: 1px solid rgba(75,23,110,0.25);
+  padding: 28px 20px; border-radius: var(--r); text-align: center;
+  transition: border-color 0.2s;
+}
+.stat-card:hover { border-color: var(--purple); }
+.stat-card .num { font-family: var(--font-h); font-size: 52px; color: var(--purple); line-height: 1; }
+.stat-card .lbl { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #555; margin-top: 4px; }
+
+/* ── DIRETORIA ── */
+.dir-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.dir-card {
+  background: var(--bg3); border: 1px solid rgba(75,23,110,0.2);
+  border-radius: var(--r); padding: 24px 20px;
+  display: flex; flex-direction: column; gap: 6px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.dir-card:hover { border-color: var(--purple); transform: translateY(-3px); }
+.dir-cargo {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--purple);
+}
+.dir-nome { font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.3; }
+.dir-matricula { font-size: 11px; color: #444; }
+.dir-presidente { border-color: rgba(140,43,190,0.5); background: rgba(75,23,110,0.15); }
+.dir-presidente .dir-cargo { color: #B35CDE; }
+
+/* ── EVENTOS ── */
+.eventos-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: start; }
+.evento-card-main {
+  background: var(--bg3); border: 1px solid rgba(140,43,190,0.35);
+  border-radius: var(--r); overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.evento-card-main:hover { border-color: var(--purple); transform: translateY(-4px); }
+.evento-img {
+  width: 100%; height: 220px; object-fit: cover;
+  display: block; filter: brightness(0.75) saturate(1.2);
+}
+.evento-img-placeholder {
+  width: 100%; height: 220px;
+  background: linear-gradient(135deg, rgba(75,23,110,0.4), rgba(140,43,190,0.15));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 80px; color: rgba(140,43,190,0.3);
+}
+.evento-body { padding: 28px 28px 24px; }
+.evento-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--purple);
+  background: rgba(140,43,190,0.15); border: 1px solid rgba(140,43,190,0.3);
+  padding: 3px 10px; border-radius: 100px; display: inline-block; margin-bottom: 14px;
+}
+.evento-body h3 {
+  font-family: var(--font-h); font-size: 36px; color: var(--white);
+  line-height: 1.05; margin-bottom: 10px;
+}
+.evento-body p { font-size: 14px; color: #888; line-height: 1.7; margin-bottom: 20px; }
+.evento-meta { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; }
+.evento-meta span {
+  font-size: 12px; font-weight: 600; color: var(--muted);
+  display: flex; align-items: center; gap: 6px;
+}
+
+.eventos-side { display: flex; flex-direction: column; gap: 16px; }
+.evento-card-sm {
+  background: var(--bg3); border: 1px solid rgba(75,23,110,0.2);
+  border-radius: var(--r); padding: 20px;
+  transition: border-color 0.2s;
+}
+.evento-card-sm:hover { border-color: var(--purple); }
+.evento-card-sm .tag { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; display: block; }
+.evento-card-sm h4 { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.evento-card-sm p { font-size: 12px; color: #555; }
+
+/* ── INSTAGRAM / REDES ── */
+.redes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+.rede-card {
+  background: var(--bg3); border: 1px solid rgba(75,23,110,0.2);
+  border-radius: var(--r); padding: 28px 24px; text-align: center;
+  text-decoration: none; transition: border-color 0.2s, transform 0.2s;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.rede-card:hover { border-color: var(--purple); transform: translateY(-3px); }
+.rede-icon { font-size: 36px; }
+.rede-name { font-size: 13px; font-weight: 700; color: var(--white); letter-spacing: 0.04em; }
+.rede-handle { font-size: 12px; color: var(--purple); }
+
+/* ── CONTATO ── */
+.contato-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.contato-info p { font-size: 15px; color: #9090A8; line-height: 1.85; margin-bottom: 24px; }
+.contato-items { display: flex; flex-direction: column; gap: 16px; }
+.contato-item {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--bg3); border: 1px solid rgba(75,23,110,0.2);
+  border-radius: var(--r); padding: 18px 20px;
+  text-decoration: none; transition: border-color 0.2s;
+}
+.contato-item:hover { border-color: var(--purple); }
+.contato-item .icon { font-size: 22px; flex-shrink: 0; }
+.contato-item .label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #444; display: block; margin-bottom: 2px; }
+.contato-item .value { font-size: 14px; font-weight: 600; color: var(--white); }
+
+.form-box {
+  background: var(--bg3); border: 1px solid rgba(75,23,110,0.25);
+  border-radius: var(--r); padding: 36px;
+}
+.form-box h3 { font-family: var(--font-h); font-size: 28px; color: var(--white); margin-bottom: 4px; }
+.form-sub { font-size: 12px; color: #444; margin-bottom: 28px; text-transform: uppercase; letter-spacing: 0.1em; }
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #555; margin-bottom: 6px; }
+.form-control {
+  width: 100%; background: var(--bg2); border: 1px solid rgba(75,23,110,0.25);
+  border-radius: var(--r); padding: 11px 14px;
+  font-family: var(--font-b); font-size: 13px; color: var(--white);
+  transition: border-color 0.2s; outline: none;
+}
+.form-control:focus { border-color: var(--purple); }
+textarea.form-control { resize: vertical; min-height: 100px; }
+.form-submit {
+  width: 100%; background: var(--purple); color: var(--white);
+  border: none; border-radius: var(--r);
+  padding: 14px; font-family: var(--font-b); font-size: 13px;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+  cursor: pointer; transition: all 0.2s; margin-top: 4px;
+}
+.form-submit:hover { background: #A040D0; transform: translateY(-1px); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bg2); border-top: 1px solid rgba(75,23,110,0.2);
+  padding: 48px 0 28px;
+}
+.footer-inner { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px; margin-bottom: 40px; }
+.footer-brand img { height: 52px; width: auto; margin-bottom: 12px; display: block; }
+.footer-brand-name { font-family: var(--font-h); font-size: 20px; color: var(--white); letter-spacing: 0.06em; }
+.footer-brand-sub { font-size: 11px; color: #444; margin-top: 2px; }
+.footer-inst { display: flex; align-items: center; gap: 16px; margin-top: 16px; }
+.footer-inst img { height: 32px; opacity: 0.45; filter: brightness(0) invert(1); transition: opacity 0.2s; }
+.footer-inst img:hover { opacity: 0.75; }
+.footer-links-group { display: flex; flex-direction: column; gap: 8px; }
+.footer-links-group h4 { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #444; margin-bottom: 4px; }
+.footer-links-group a { font-size: 13px; color: #555; text-decoration: none; transition: color 0.2s; }
+.footer-links-group a:hover { color: var(--purple); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.04); padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px; font-size: 12px; color: #333;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 64px; left: 0; right: 0;
+    background: rgba(8,5,13,0.98); padding: 16px;
+    border-bottom: 1px solid rgba(75,23,110,0.2); gap: 4px;
+  }
+  .sobre-grid, .eventos-grid, .contato-grid { grid-template-columns: 1fr; }
+  .section { padding: 64px 0; }
+  .footer-top { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════ NAVBAR ════ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero">
+      <img src="assets/logos/logo-caem-roxo.png" alt="CAEM">
+      <div>
+        <span class="nav-logo-text">CAEM</span>
+        <span class="nav-logo-sub">Eng. Mecânica · UFPA</span>
+      </div>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#diretoria">Diretoria</a></li>
+      <li><a href="#eventos">Eventos</a></li>
+      <li><a href="#redes">Redes</a></li>
+      <li><a href="#contato" class="nav-cta">Contato</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ════ HERO ════ -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <span class="hero-sup">Centro Acadêmico · FEM CAMTUC</span>
+    <img class="hero-logo" src="assets/logos/logo-caem-roxo.png" alt="Logo CAEM"
+         style="filter: drop-shadow(0 0 60px rgba(140,43,190,0.55));">
+    <h1 class="hero-title"><span>C</span>AEM</h1>
+    <p class="hero-subtitle">Centro Acadêmico de Engenharia Mecânica</p>
+    <div class="hero-btns">
+      <a href="#sobre" class="btn btn-primary">Conheça o CAEM</a>
+      <a href="#eventos" class="btn btn-outline">Próximos Eventos</a>
+    </div>
+    <div class="hero-institucional">
+      <div class="hero-inst-item">
+        <img src="assets/logos/logo-ufpa.png" alt="UFPA">
+        <span>UFPA Tucuruí</span>
+      </div>
+      <div class="hero-inst-item">
+        <img src="assets/logos/logo-fem.png" alt="FEM">
+        <span>Faculdade de Eng. Mecânica</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SOBRE ════ -->
+<section class="section section-alt" id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-text">
+        <div class="eyebrow">01 · Sobre o CAEM</div>
+        <h2 class="section-title">QUEM SOMOS</h2>
+        <div class="section-line"></div>
+        <p>O <strong style="color:var(--white)">Centro Acadêmico de Engenharia Mecânica (CAEM)</strong> é a entidade representativa dos estudantes da Faculdade de Engenharia Mecânica da UFPA — campus Tucuruí (CAMTUC).</p>
+        <p>Fundado para fortalecer a voz estudantil, promover desenvolvimento técnico e científico e construir pontes entre a academia e a indústria, o CAEM atua diretamente na vida acadêmica de cada estudante do curso.</p>
+        <p>Nossa gestão atual atua nas frentes de Assistência Estudantil, Monitoria, Comunicação, Eventos e Finanças — garantindo uma representação ativa e presente.</p>
+        <br>
+        <a href="assets/estatuto/ESTATUTO CAEM 2024.pdf" class="btn btn-outline" target="_blank">📄 Ver Estatuto</a>
+      </div>
+      <div class="sobre-stats">
+        <div class="stat-card">
+          <div class="num">FEM</div>
+          <div class="lbl">Faculdade de Engenharia Mecânica</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">CAMTUC</div>
+          <div class="lbl">Campus UFPA Tucuruí</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">10</div>
+          <div class="lbl">Membros na diretoria</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">2026</div>
+          <div class="lbl">Gestão atual</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ DIRETORIA ════ -->
+<section class="section" id="diretoria">
+  <div class="container">
+    <div class="eyebrow">02 · Gestão 2024–2026</div>
+    <h2 class="section-title">DIRETORIA</h2>
+    <div class="section-line"></div>
+    <div class="dir-grid">
+
+      <div class="dir-card dir-presidente">
+        <div class="dir-cargo">⭐ Presidente</div>
+        <div class="dir-nome">Francisco Edvaldo Angelim Junior</div>
+        <div class="dir-matricula">Mat. 202334040020</div>
+      </div>
+
+      <div class="dir-card">
+        <div class="dir-cargo">Vice-Presidente</div>
+        <div class="dir-nome">Jean Pedro Monteiro Pinheiro</div>
+        <div class="dir-matricula">Mat. 202334040013</div>
+      </div>
+
+      <div class="dir-card">
+        <div class="dir-cargo">Secretária Geral</div>
+        <div class="dir-nome">Suzane de Cássia Freitas Damasceno</div>
+        <div class="dir-matricula">Mat. 202434040012</div>
+      </div>
+
+      <div class="dir-card">
+        <div class="dir-cargo">Secretário Geral</div>
+        <div class="dir-nome">Ryan Ranieri Valente Moreno</div>
+        <div class="dir-matricula">Mat. 202434040006</div>
+      </div>
+
+      <div class="dir-card">
+        <div class="dir-cargo">Assistência Estudantil</div>
+        <div class="dir-nome">Francisco Douglas Rocha Cunha Júnior</div>
+        <div class="dir-matricula">Mat. 202334040024</div>
+      </div>
+
+      <div class="dir-card">
+        <div class="dir-cargo">Assistência Estudantil</div>
+        <div class="dir-nome">Mauro André O'Grady Rodrigues</div>
+        <div class="dir-matricula">Mat. 202334040007</div>
+      </div>
+
+      <div class="dir-card">
+        <div class="dir-cargo">Monitoria e Capacitação</div>
+        <div class="dir-nome">Wegda Caroline Veiga de Oliveira</div>
+        <div class="dir-matricula">Mat. 202234040007</div>
+      </div>
+
+      <div class="dir-card">
+        <div class="dir-cargo">Comunicação</div>
+        <div class="dir-nome">Jeferson Juan Vulcão Monteiro</div>
+        <div class="dir-matricula">Mat. 202234040025</div>
+      </div>
+
+      <div class="dir-card">
+        <div class="dir-cargo">Eventos</div>
+        <div class="dir-nome">Edelson Moises Almeida da Silva</div>
+        <div class="dir-matricula">Mat. 202434040016</div>
+      </div>
+
+      <div class="dir-card">
+        <div class="dir-cargo">Finanças</div>
+        <div class="dir-nome">Ana Clara Nascimento da Silva</div>
+        <div class="dir-matricula">Mat. 202334040019</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ EVENTOS ════ -->
+<section class="section section-alt" id="eventos">
+  <div class="container">
+    <div class="eyebrow">03 · Agenda</div>
+    <h2 class="section-title">EVENTOS</h2>
+    <div class="section-line"></div>
+    <div class="eventos-grid">
+
+      <div class="evento-card-main">
+        <div class="evento-img-placeholder">⚙</div>
+        <div class="evento-body">
+          <span class="evento-tag">Em breve · 2026</span>
+          <h3>III SIMPOMEC 2026</h3>
+          <p>O maior evento acadêmico da FEM CAMTUC. Palestras técnicas, minicursos, apresentação de artigos científicos e networking com empresas da região.</p>
+          <div class="evento-meta">
+            <span>📅 Outubro 2026</span>
+            <span>📍 UFPA Tucuruí</span>
+            <span>🎓 5 cursos de Engenharia</span>
+          </div>
+          <a href="https://caemtucurui-web.github.io/SIMPOMEC" target="_blank" class="btn btn-primary">Ver Site do Evento →</a>
+        </div>
+      </div>
+
+      <div class="eventos-side">
+        <div class="evento-card-sm">
+          <span class="tag">Recorrente</span>
+          <h4>Semana de Recepção de Calouros</h4>
+          <p>Integração e acolhimento dos novos estudantes da FEM.</p>
+        </div>
+        <div class="evento-card-sm">
+          <span class="tag">Recorrente</span>
+          <h4>Visitas Técnicas</h4>
+          <p>Visitas a plantas industriais e usinas da região do Tocantins.</p>
+        </div>
+        <div class="evento-card-sm">
+          <span class="tag">Recorrente</span>
+          <h4>Semana Acadêmica</h4>
+          <p>Palestras, workshops e minicursos ao longo do semestre.</p>
+        </div>
+        <div class="evento-card-sm">
+          <span class="tag">Institucional</span>
+          <h4>Assembleias Estudantis</h4>
+          <p>Reuniões abertas de prestação de contas e votações da gestão.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ REDES SOCIAIS ════ -->
+<section class="section" id="redes">
+  <div class="container">
+    <div class="eyebrow">04 · Siga o CAEM</div>
+    <h2 class="section-title">REDES SOCIAIS</h2>
+    <div class="section-line"></div>
+    <div class="redes-grid">
+
+      <a class="rede-card" href="https://instagram.com/caemtucurui" target="_blank">
+        <div class="rede-icon">📸</div>
+        <div class="rede-name">Instagram</div>
+        <div class="rede-handle">@caemtucurui</div>
+      </a>
+
+      <a class="rede-card" href="mailto:caemtucurui@gmail.com" target="_blank">
+        <div class="rede-icon">✉️</div>
+        <div class="rede-name">E-mail</div>
+        <div class="rede-handle">caemtucurui@gmail.com</div>
+      </a>
+
+      <a class="rede-card" href="https://caemtucurui-web.github.io/SIMPOMEC" target="_blank">
+        <div class="rede-icon">⚙️</div>
+        <div class="rede-name">III SIMPOMEC</div>
+        <div class="rede-handle">Site do Evento</div>
+      </a>
+
+      <a class="rede-card" href="https://fem.camtuc.ufpa.br/index.php/centro-academico" target="_blank">
+        <div class="rede-icon">🎓</div>
+        <div class="rede-name">Página FEM</div>
+        <div class="rede-handle">fem.camtuc.ufpa.br</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ CONTATO ════ -->
+<section class="section section-alt" id="contato">
+  <div class="container">
+    <div class="eyebrow">05 · Fale conosco</div>
+    <h2 class="section-title">CONTATO</h2>
+    <div class="section-line"></div>
+    <div class="contato-grid">
+
+      <div>
+        <p>Tem dúvidas, sugestões, quer propor uma parceria ou participar das atividades do CAEM? Fale com a gente.</p>
+        <div class="contato-items">
+          <a class="contato-item" href="mailto:caemtucurui@gmail.com">
+            <span class="icon">✉️</span>
+            <div>
+              <span class="label">E-mail</span>
+              <span class="value">caemtucurui@gmail.com</span>
+            </div>
+          </a>
+          <a class="contato-item" href="https://instagram.com/caemtucurui" target="_blank">
+            <span class="icon">📸</span>
+            <div>
+              <span class="label">Instagram</span>
+              <span class="value">@caemtucurui</span>
+            </div>
+          </a>
+          <div class="contato-item">
+            <span class="icon">📍</span>
+            <div>
+              <span class="label">Localização</span>
+              <span class="value">FEM — UFPA Campus Tucuruí</span>
+            </div>
+          </div>
+          <div class="contato-item">
+            <span class="icon">🕐</span>
+            <div>
+              <span class="label">Atendimento</span>
+              <span class="value">Seg–Sex, horário acadêmico</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-box">
+        <h3>Envie uma Mensagem</h3>
+        <p class="form-sub">Respondemos em até 48h</p>
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" class="form-control" placeholder="Seu nome completo">
+        </div>
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" class="form-control" placeholder="seu@email.com">
+        </div>
+        <div class="form-group">
+          <label>Assunto</label>
+          <input type="text" class="form-control" placeholder="Ex: Parceria, Dúvida, Sugestão">
+        </div>
+        <div class="form-group">
+          <label>Mensagem</label>
+          <textarea class="form-control" placeholder="Escreva sua mensagem..."></textarea>
+        </div>
+        <button class="form-submit" onclick="window.location.href='mailto:caemtucurui@gmail.com'">
+          Enviar Mensagem
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/logos/logo-caem-roxo.png" alt="CAEM">
+        <div class="footer-brand-name">CAEM</div>
+        <div class="footer-brand-sub">Centro Acadêmico de Engenharia Mecânica</div>
+        <div class="footer-inst">
+          <img src="assets/logos/logo-ufpa.png" alt="UFPA">
+          <img src="assets/logos/logo-fem.png"  alt="FEM">
+        </div>
+      </div>
+      <div class="footer-links-group">
+        <h4>Navegação</h4>
+        <a href="#sobre">Sobre o CAEM</a>
+        <a href="#diretoria">Diretoria</a>
+        <a href="#eventos">Eventos</a>
+        <a href="#redes">Redes Sociais</a>
+        <a href="#contato">Contato</a>
+      </div>
+      <div class="footer-links-group">
+        <h4>Links Úteis</h4>
+        <a href="https://caemtucurui-web.github.io/SIMPOMEC" target="_blank">III SIMPOMEC 2026</a>
+        <a href="https://fem.camtuc.ufpa.br" target="_blank">FEM CAMTUC</a>
+        <a href="https://ufpa.br" target="_blank">UFPA</a>
+        <a href="assets/estatuto/ESTATUTO CAEM 2024.pdf" target="_blank">Estatuto CAEM</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 CAEM — Centro Acadêmico de Engenharia Mecânica · UFPA Tucuruí</span>
+      <span style="color:#333">Gestão 2024–2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Navbar scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.style.background = window.scrollY > 40
+    ? 'rgba(8,5,13,0.98)'
+    : 'rgba(8,5,13,0.95)';
+});
+
+// Mobile menu
+document.getElementById('nav-toggle').addEventListener('click', () => {
+  document.getElementById('nav-links').classList.toggle('open');
+});
+
+// Active link highlight
+const sections = document.querySelectorAll('section[id]');
+const links = document.querySelectorAll('.nav-links a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      links.forEach(l => l.classList.remove('active-link'));
+      const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (active) active.classList.add('active-link');
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
